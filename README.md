@@ -66,7 +66,7 @@ The script contains several configuration variables that must be set:
 
 * EMAIL_DOMAINS - zero or more email domains controlled by your organization.  See the detailed discussion of EMAIL_DOMAINS below.
 
-By default, Smartsheet's has an opt-in account membership model - users cannot be added to a Smartsheet account without their explicit consent.  This means that when you attempt to add a user to your account, an email invitation is sent to the user's email address asking him/her to join.
+By default, Smartsheet has an opt-in account membership model - users cannot be added to a Smartsheet account without their explicit consent.  This means that when you attempt to add a user to your account, an email invitation is sent to the user's email address asking him/her to join.
 
 Let's say that you own example.com, and you want to provision Smartsheet logins for 10k members of example.com seamlessly - without requiring them to take an action.  Contact your Smartsheet account representative to add a domain record to your account - be prepared to provide proof of domain ownership.  Once the domain record is in place, add the domain to the EMAIL_DOMAINS list, and the members of example.com can be seamlessly provisioned via this utility.
 

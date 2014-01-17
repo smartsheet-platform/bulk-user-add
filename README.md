@@ -1,4 +1,3 @@
-
 Smartsheet Bulk User Add Utility
 ===
 
@@ -28,8 +27,8 @@ This command-line utility enables administrators of Team and Enterprise accounts
 Revision History
 --------
 
-* 1.0 - June 16 2013 - Initial build
-* 1.1 - December 16 2014 - Improved logging and error handling
+* 1.0 - June 16, 2013 - Initial build
+* 1.1 - January 16, 2014 - Improved logging and error handling
 
 
 Dependencies
@@ -44,7 +43,7 @@ Dependencies
 Configuration
 ------
 
-###User unput list
+###User input list
 
 Provide a CSV formatted list of users to be added to your Smartsheet account.  You can use the included user-list.csv sample file to get started.  The following columns
 are expected, in this order:

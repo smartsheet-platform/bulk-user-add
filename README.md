@@ -67,11 +67,11 @@ The script contains several configuration variables that must be set:
 
 * EMAIL_DOMAINS - zero or more email domains controlled by your organization.  See the detailed discussion of EMAIL_DOMAINS below.
 
-By default, Smartsheet's has an opt-in account membership model - users cannot be added to a Smartsheet account without their explicit consent.  It means that when you attempt to add a user to your account, an email invitation is sent to the user's email address asking him/her to join.
+By default, Smartsheet's has an opt-in account membership model - users cannot be added to a Smartsheet account without their explicit consent.  This means that when you attempt to add a user to your account, an email invitation is sent to the user's email address asking him/her to join.
 
-Let's say that you own example.com, and you want to provision Smartsheet logins for 10k members of example.com seamlessly - without requiring them to take an action.  Contact our Smartsheet account representative to add a domain record to your account - be prepared to provide proof of domain ownership.  Once the domain record is in place, add the domain to the EMAIL_DOMAINS list, and the members of example.com can be seamlessly provisioned via this utility.
+Let's say that you own example.com, and you want to provision Smartsheet logins for 10k members of example.com seamlessly - without requiring them to take an action.  Contact your Smartsheet account representative to add a domain record to your account - be prepared to provide proof of domain ownership.  Once the domain record is in place, add the domain to the EMAIL_DOMAINS list, and the members of example.com can be seamlessly provisioned via this utility.
 
-There are several exception to this rule:
+There are several exception to this rule when an attempt to add a user will fail.  In these scenarios the utility will print a meaninful error message and will continue to execute through the rest of the user list:
 
 * You are attempting to add the user as a licensed sheet creator, and you have already exhausted the number of licensed allotted for your account
 * You are attempting to add the user as a regular member (rather than a licensed sheet creator), and the user already owns one or more sheets - in that case, the user must be added as a licensed sheet creator
@@ -92,5 +92,8 @@ sleep for 60 seconds before retrying whenever a rate limit error is encountered.
 If a non-fatal error is encountered (e.g., the user already belongs to another Smartsheet account), the utility will log the error and continue.
 
 The utility is currently configured to skip any users that don't match your domain records.  You can edit the code to override that, but keep in mind that these users will receive email invitations to join your account.  See the discussion of EMAIL_DOMAINS for more information.
+
+###Logging
+Verbose status messages and errors are printed to output.  It is strongly recommended that you redirect your output to a log file in case you need to troubleshoot your batch.
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/25c830f239e48c7b8b5584b1f4afaab6 "githalytics.com")](http://githalytics.com/smartsheet-platform/bulk-user-add)

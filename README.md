@@ -27,8 +27,8 @@ This command-line utility enables administrators of Team and Enterprise accounts
 Revision History
 --------
 
-* 1.0 - June 16 2013 - Initial build
-* 1.1 - December 16 2014 - Improved logging and error handling
+* 1.0 - June 16, 2013 - Initial build
+* 1.1 - January 16, 2014 - Improved logging and error handling
 
 
 Dependencies

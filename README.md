@@ -1,4 +1,3 @@
-
 Smartsheet Bulk User Add Utility
 ===
 
@@ -44,7 +43,7 @@ Dependencies
 Configuration
 ------
 
-###User unput list
+###User input list
 
 Provide a CSV formatted list of users to be added to your Smartsheet account.  You can use the included user-list.csv sample file to get started.  The following columns
 are expected, in this order:

@@ -26,9 +26,9 @@ This command-line utility enables administrators of Team and Enterprise accounts
 
 Revision History
 --------
-
-* 1.0 - June 16, 2013 - Initial build
+* 1.2 - January 22, 2014 - Updated instructions
 * 1.1 - January 16, 2014 - Improved logging and error handling
+* 1.0 - June 16, 2013 - Initial build
 
 
 Dependencies
@@ -45,7 +45,7 @@ Configuration
 
 ###User input list
 
-Provide a CSV formatted list of users to be added to your Smartsheet account.  You can use the included user-list.csv sample file to get started.  The following columns
+Provide a CSV formatted list of users to be added to your Smartsheet account.  Use the included user-list.csv sample file to get started.  The following columns
 are expected, in this order:
 
 * Email (required)
@@ -58,26 +58,26 @@ are expected, in this order:
 
 ###Config variables
 
-The script contains several configuration variables that must be set:
+In bulk-user-add.rb, set the following config variables:
 
-* SS_TOKEN - Smartsheet API access token belonging to an account administrator.  See the [Smartsheet API docs](http://smartsheet.com/developers) for help on how to generate acess tokens.
+* SS_TOKEN - Smartsheet API access token that belongs to an account administrator.  See the [Smartsheet API docs](http://smartsheet.com/developers) for help on how to generate acess tokens.
 
-* CSV_FILE - name of the user input list you have created.
+* CSV_FILE - name of the file containing the list of users to be created.
 
-* EMAIL_DOMAINS - zero or more email domains controlled by your organization.  See the detailed discussion of EMAIL_DOMAINS below.
+* EMAIL_DOMAINS - zero or more email domains.  If user's email address matches any of the domains, this utility will try to add the user to the organization, otherwise it will skip the user, print an error message and move on.  See the detailed discussion of EMAIL_DOMAINS below.
+
+###Email domains
 
 By default, Smartsheet has an opt-in account membership model - users cannot be added to a Smartsheet account without their explicit consent.  This means that when you attempt to add a user to your account, an email invitation is sent to the user's email address asking him/her to join.
 
-Let's say that you own example.com, and you want to provision Smartsheet logins for 10k members of example.com seamlessly - without requiring them to take an action.  Contact your Smartsheet account representative to add a domain record to your account - be prepared to provide proof of domain ownership.  Once the domain record is in place, add the domain to the EMAIL_DOMAINS list, and the members of example.com can be seamlessly provisioned via this utility.
+Organizations that can prove their domain ownership via our domain validation process can bypass the invitation and user acceptance step, and add users without them getting notified or requiring them to take any action.
 
-There are several exception to this rule when an attempt to add a user will fail.  In these scenarios the utility will print a meaninful error message and will continue to execute through the rest of the user list:
+To add users to your Smartsheet account and bypass the invitation step:
 
-* You are attempting to add the user as a licensed sheet creator, and you have already exhausted the number of licensed allotted for your account
-* You are attempting to add the user as a regular member (rather than a licensed sheet creator), and the user already owns one or more sheets - in that case, the user must be added as a licensed sheet creator
-* The user is already a member of your account
-* The user does not match any of your registered email domains
-* The user is an existing Smartsheet user and belongs to another trial account
-* The user is an existing Smartsheet user and belongs to another paid account
+* contact your Smartsheet account representative to add a domain record to your account - be prepared to provide proof of domain ownership
+* once the domain record is in place, add the domain to the EMAIL_DOMAINS list
+
+If you want to follow the standard user invitation and acceptance flow, don't worry about registering your domains with Smartsheet, and simply add them to EMAIL_DOMAINS list.
 
 
 Usage
@@ -88,9 +88,14 @@ Rate limit: The Smartsheet API enforces a rate limit of 300 calls per minute per
 sleep for 60 seconds before retrying whenever a rate limit error is encountered.
 
 ###Errors
-If a non-fatal error is encountered (e.g., the user already belongs to another Smartsheet account), the utility will log the error and continue.
+If a non-fatal error is encountered, the utility will print a meaningful error message, skip the current user, and will continue to execute through the rest of the user list.  There are several scenarios when an attempt to add a user will fail:  
 
-The utility is currently configured to skip any users that don't match your domain records.  You can edit the code to override that, but keep in mind that these users will receive email invitations to join your account.  See the discussion of EMAIL_DOMAINS for more information.
+* You are attempting to add the user as a licensed sheet creator, and you have already exhausted the number of licensed allotted for your account
+* You are attempting to add the user as a regular member (rather than a licensed sheet creator), and the user already owns one or more sheets - in that case, the user must be added as a licensed sheet creator
+* The user is already a member of your account
+* The user does not match any of your registered email domains
+* The user is an existing Smartsheet user and belongs to another trial account
+* The user is an existing Smartsheet user and belongs to another paid account
 
 ###Logging
 Verbose status messages and errors are printed to output.  It is strongly recommended that you redirect your output to a log file in case you need to troubleshoot your batch.
